@@ -24,7 +24,7 @@ io.on('connection', function (socket) {
 
 app.post('/get', (req, res) => {
   let data = { ...req.body, "date": new Date().toDateString(), "time": new Date().toLocaleTimeString() }
-  //console.log(req.body)
+  console.log(new Date().toGMTString())
   io.sockets.emit('broadcast', { ...data })
 
   res.send("data posted")
