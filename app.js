@@ -11,7 +11,7 @@ app.use(bodyParser.json())
 app.use(express.static(__dirname + '/'));
 
 io.on('connection', function (socket) {
-  console.log('A user connected');vc 
+  console.log('A user connected');
 
   //io.sockets.emit('broadcast',{ description: ' clients connected!'});
 
