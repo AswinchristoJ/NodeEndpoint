@@ -34,7 +34,7 @@ app.post('/get', (req, res) => {
   io.sockets.emit('broadcast', { ...data })
 
   res.send("data posted")
-  axios.post('https://myburger-b33d0.firebaseio.com/locaswin.json', data)
+  axios.post('https://damage-analyser.firebaseio.com/location.json', data)
     .then(function (response) {
       console.log('stored in firebase successfully');
     })
