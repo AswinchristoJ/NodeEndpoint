@@ -17,7 +17,7 @@ res.send(`<form action="/get" method="get">
 
 app.get('/get',(req,res)=>{
 console.log(req.query)
-res.send(req.query)
+res.send(req.query,req.headers["Date"])
 
 axios.post('https://myburger-b33d0.firebaseio.com/locaswin.json',req.query)
   .then(function (response) {
