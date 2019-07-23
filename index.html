@@ -29,7 +29,7 @@
             lat = parseFloat(temp.lat)
             lon = parseFloat(temp.lon)
             let value = `${lat},${lon}|flag-lg-4DBD33-Danger`
-            document.getElementsByTagName('iframe')[0].src = `https://www.mapquestapi.com/staticmap/v5/map?key=7qAHtUkSymItMvSGgAl9Ib1ji8wc6lkV&scalebar=true|bottom&banner=locations+of+last+accidet|sm-top&locations=${value}&zoom=12&size=1500,600`
+            document.getElementsByTagName('iframe')[0].src = `https://www.mapquestapi.com/staticmap/v5/map?key=7qAHtUkSymItMvSGgAl9Ib1ji8wc6lkV&scalebar=true|bottom&banner=locations+of+last+accident|sm-top&locations=${value}&zoom=12&size=1500,600`
 
             let dateElement = document.getElementById('date');
             let timeElement = document.getElementById('time');
@@ -49,7 +49,7 @@
         lon = data.lon
 
         let value1 = `${lat},${lon}|flag-lg-4DBD33-Danger`
-            document.getElementsByTagName('iframe')[0].src = `https://www.mapquestapi.com/staticmap/v5/map?key=7qAHtUkSymItMvSGgAl9Ib1ji8wc6lkV&scalebar=true|bottom&banner=locations+of+last+accidet|sm-top&locations=${value1}&zoom=12&size=1500,600`
+            document.getElementsByTagName('iframe')[0].src = `https://www.mapquestapi.com/staticmap/v5/map?key=7qAHtUkSymItMvSGgAl9Ib1ji8wc6lkV&scalebar=true|bottom&banner=locations+of+last+accident|sm-top&locations=${value1}&zoom=12&size=1500,600`
     });
 </script>
 
