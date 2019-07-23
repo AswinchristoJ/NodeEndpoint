@@ -23,7 +23,13 @@ io.on('connection', function (socket) {
 
 
 app.post('/get', (req, res) => {
-  let data = { ...req.body, "date": new Date().toDateString(), "time": new Date().toLocaleTimeString() }
+
+  d = new Date()
+  d.setHours(d.getHours() + 5);
+  d.setMinutes(d.getMinutes() + 30)
+  d = d.toLocaleTimeString()
+
+  let data = { ...req.body, "date": new Date().toDateString(), "time": d }
   console.log(new Date().toGMTString())
   io.sockets.emit('broadcast', { ...data })
 
