@@ -30,7 +30,7 @@ app.post('/get', (req, res) => {
   res.send("data posted")
   axios.post('https://myburger-b33d0.firebaseio.com/locaswin.json', data)
     .then(function (response) {
-      console.log(response);
+      console.log('stored in firebase successfully');
     })
     .catch(function (error) {
       console.log(error);

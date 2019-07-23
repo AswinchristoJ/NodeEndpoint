@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -8,18 +9,39 @@
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>
 </head>
-<script src = "/socket.io/socket.io.js"></script>
-   
-   <script>
-      var socket = io();
-      socket.on('broadcast',function(data) {
-         let ele = document.getElementsByTagName('h1')[0];
-         ele.innerHTML = data.date;
-      });
-   </script>
+<script src="/socket.io/socket.io.js"></script>
+
+<script>
+    fetch('https://myburger-b33d0.firebaseio.com/locaswin.json')
+        .then((data) => {
+            return data.json();
+        })
+        .then((data1) => {
+            let temp = data1[Object.keys(data1).sort().pop()]
+            //console.log(temp)
+            let dateElement = document.getElementById('date');
+            let timeElement = document.getElementById('time');
+            dateElement.innerHTML = temp.date;
+            timeElement.innerHTML = temp.time;
+
+        })
+        .catch((err) => console.log(err))
+    var socket = io();
+    socket.on('broadcast', function (data) {
+        let dateElement = document.getElementById('date');
+        let timeElement = document.getElementById('time');
+        dateElement.innerHTML = data.date;
+        timeElement.innerHTML = data.time;
+    });
+</script>
+
 <body>
-    <h1>heooiiini</h1>
-    <form action="/get" method="post">
+    <h2>Last recorded Accident : </h2>
+    <label>Date : </label>
+    <h3 id="date"> </h3>
+    <label>Time : </label>
+    <h3 id="time"> </h3>
+    <!-- <form action="/get" method="post">
         First name:<br>
         <input type="text" name="firstname" value="Mickey">
         <br>
@@ -27,6 +49,7 @@
         <input type="text" name="lastname" value="Mouse">
         <br><br>
         <input type="submit" value="Submit">
-      </form>
+      </form> -->
 </body>
+
 </html>
