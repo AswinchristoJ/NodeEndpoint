@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>sampll</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<script src = "/socket.io/socket.io.js"></script>
+   
+   <script>
+      var socket = io();
+      socket.on('broadcast',function(data) {
+         let ele = document.getElementsByTagName('h1')[0];
+         ele.innerHTML = data.date;
+      });
+   </script>
+<body>
+    <h1>heooiiini</h1>
+    <form action="/get" method="post">
+        First name:<br>
+        <input type="text" name="firstname" value="Mickey">
+        <br>
+        Last name:<br>
+        <input type="text" name="lastname" value="Mouse">
+        <br><br>
+        <input type="submit" value="Submit">
+      </form>
+</body>
+</html>

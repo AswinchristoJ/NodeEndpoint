@@ -2,27 +2,31 @@ const express = require('express')
 const app = express()
 const axios = require('axios')
 const bodyParser = require('body-parser')
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
-app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
-app.get('/', (req, res) => {
-  console.log(req.query)
-  res.send(`<form action="/get" method="post">
-  First name:<br>
-  <input type="text" name="firstname" value="Mickey">
-  <br>
-  Last name:<br>
-  <input type="text" name="lastname" value="Mouse">
-  <br><br>
-  <input type="submit" value="Submit">
-</form>`)
-})
+app.use(express.static(__dirname + '/'));
+
+io.on('connection', function (socket) {
+  console.log('A user connected');vc 
+
+  //io.sockets.emit('broadcast',{ description: ' clients connected!'});
+
+  //Whenever someone disconnects this piece of code executed
+  socket.on('disconnect', function () {
+    console.log('A user disconnected');
+  });
+});
+
 
 app.post('/get', (req, res) => {
-  let data = {...req.body,"date":new Date()}
+  let data = { ...req.body, "date": new Date().toDateString(), "time": new Date().toLocaleTimeString() }
   //console.log(req.body)
-  
+  io.sockets.emit('broadcast', { ...data })
+
   res.send("data posted")
   axios.post('https://myburger-b33d0.firebaseio.com/locaswin.json', data)
     .then(function (response) {
@@ -34,6 +38,6 @@ app.post('/get', (req, res) => {
 
 })
 
-app.listen(process.env.PORT || 4000, () => {
+http.listen(process.env.PORT || 4000, () => {
   console.log('yup listening')
 })
