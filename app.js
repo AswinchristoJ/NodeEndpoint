@@ -2,9 +2,9 @@ const express = require('express')
 const app = express()
 const axios = require('axios')
 
-app.get('/',(req,res)=>{
-console.log(req.query)
-res.send(`<form action="/get" method="get">
+app.get('/', (req, res) => {
+  console.log(req.query)
+  res.send(`<form action="/get" method="get">
   First name:<br>
   <input type="text" name="firstname" value="Mickey">
   <br>
@@ -15,20 +15,22 @@ res.send(`<form action="/get" method="get">
 </form>`)
 })
 
-app.get('/get',(req,res)=>{
-console.log(req.query)
-res.send(req.query,req.headers["Date"])
+app.get('/get', (req, res) => {
+  let data = {...req.query,"date":new Date()}
+  console.log(req.query)
+  
+  //res.send({ req.query, "date": req.headers["Date"] })
+res.send(data)
+  axios.post('https://myburger-b33d0.firebaseio.com/locaswin.json', data)
+    .then(function (response) {
+      console.log(response,data);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
 
-axios.post('https://myburger-b33d0.firebaseio.com/locaswin.json',req.query)
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
 })
 
-})
-
-app.listen(process.env.PORT||4000,()=>{
-console.log('yup listening')
+app.listen(process.env.PORT || 4000, () => {
+  console.log('yup listening')
 })
