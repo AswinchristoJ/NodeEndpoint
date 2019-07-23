@@ -19,10 +19,7 @@ app.get('/get',(req,res)=>{
 console.log(req.query)
 res.send(req.query)
 
-axios.post('https://myburger-b33d0.firebaseio.com/locaswin.json',{
-'firstName': 'Fred',
-    'lastName': 'Flintstone'
-})
+axios.post('https://myburger-b33d0.firebaseio.com/locaswin.json',req.query)
   .then(function (response) {
     console.log(response);
   })
