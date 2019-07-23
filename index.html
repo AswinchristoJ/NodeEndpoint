@@ -6,12 +6,18 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>sampll</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
+
+    <style>
+        h3 {
+            color: #2196F3;
+        }
+    </style>
 </head>
 <script src="/socket.io/socket.io.js"></script>
 
 <script>
+    var lat = 0
+    var lon = 0
     fetch('https://myburger-b33d0.firebaseio.com/locaswin.json')
         .then((data) => {
             return data.json();
@@ -19,8 +25,15 @@
         .then((data1) => {
             let temp = data1[Object.keys(data1).sort().pop()]
             //console.log(temp)
+
+            lat = parseFloat(temp.lat)
+            lon = parseFloat(temp.lon)
+            let value = `${lat},${lon}|flag-lg-4DBD33-Danger`
+            document.getElementsByTagName('iframe')[0].src = `https://www.mapquestapi.com/staticmap/v5/map?key=7qAHtUkSymItMvSGgAl9Ib1ji8wc6lkV&scalebar=true|bottom&banner=locations+of+last+accidet|sm-top&locations=${value}&zoom=12&size=1500,600`
+
             let dateElement = document.getElementById('date');
             let timeElement = document.getElementById('time');
+
             dateElement.innerHTML = temp.date;
             timeElement.innerHTML = temp.time;
 
@@ -32,6 +45,7 @@
         let timeElement = document.getElementById('time');
         dateElement.innerHTML = data.date;
         timeElement.innerHTML = data.time;
+        console.log(1,2,lat,lon)
     });
 </script>
 
@@ -41,6 +55,7 @@
     <h3 id="date"> </h3>
     <label>Time : </label>
     <h3 id="time"> </h3>
+    <iframe src="" width="100%" height="550" frameborder="0" style="border:0" allowfullscreen></iframe>
     <!-- <form action="/get" method="post">
         First name:<br>
         <input type="text" name="firstname" value="Mickey">
